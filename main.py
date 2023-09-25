@@ -23,23 +23,26 @@ print(myRow.Name)
 width = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
 length = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-p1_ships = input("Where do you want your ships? ")
-p1_locations = p1_ships.split(", ")
-valid_input = True
+
+valid_input = False
 
 
 while not valid_input:
+  p1_ships = input("Where do you want your ships? ")
+  p1_locations = p1_ships.split(", ")
   
-for ShipLocation in p1_locations:
-  if isValidInput(ShipLocation, chosen_p1_locations):
-    chosen_p1_locations.append(ShipLocation)
+  for ShipLocation in p1_locations:
+    if isValidInput(ShipLocation, chosen_p1_locations):
+      chosen_p1_locations.append(ShipLocation)
+      valid_input = True
   
-  else:
-    print("Invalid Input")
-    valid_input = False
+    else:
+      print("Invalid Input")
+      valid_input = False
+      break
 
-if valid_input:
-  print("Valid Input")
+  if valid_input:
+    print("Valid Input")
   
 
 
