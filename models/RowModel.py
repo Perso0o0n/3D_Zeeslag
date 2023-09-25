@@ -1,7 +1,7 @@
 # row 
 # name a - z 
 # list [column]
-import ColumnModel
+from models.ColumnModel import ColumnModel
 
 
 class RowModel:

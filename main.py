@@ -17,9 +17,8 @@ def isValidInput(userInput, chosen_locations):
 
 chosen_p1_locations = []
 
-# row = RowModel("A",2)
-# print(row.Name)
-
+row = RowModel.RowModel("A",2)
+print(row.Name)
 
 width = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
 length = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
