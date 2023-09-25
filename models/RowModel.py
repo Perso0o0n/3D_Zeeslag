@@ -1,14 +1,15 @@
-# row 
-# name a - z 
+# row
+# name a - z
 # list [column]
-import ColumnModel
+from ColumnModel import ColumnModel
 
 
 class RowModel:
-  def __init__(self,name , columns):
+
+  def __init__(self, name, columns):
     self.Name = name
     createColumns = []
-    for x in range(0,columns):
+    for x in range(0, columns):
       createColumn = ColumnModel(F"{self.Name}{x}")
       createColumns.append(createColumn)
     self.columns = createColumns
