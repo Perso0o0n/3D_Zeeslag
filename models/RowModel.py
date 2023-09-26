@@ -16,4 +16,7 @@ class RowModel:
     self.columns = createColumns
 
   def __str__(self):
-    return F"{self.columns}\n"
+    return F"{self.columns}"
+  
+  def __repr__(self) -> str:
+    return F"{self.columns}"
