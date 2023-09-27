@@ -1,24 +1,23 @@
 from GameBoard import GameBoard
 import os
 import time
+import winsound
 
 
-chosen_p1_locations = []
+#start the game
+gameInProgress = True
+input(
+    "welcome to spaceslag (press enter to continue)"
+)
 
 #select difficulty
 valid_input = False
 while not(valid_input):
-    difficulty = input("choose difficulty (1,2,3): "))
+    difficulty = input("choose difficulty (1,2,3): ")
     if(difficulty.isdigit() and len(difficulty) == 1):
         if(int(difficulty) <= 3 and int(difficulty) >= 1):
             valid_input = True
-            gameBoard = GameBoard(int(difficulty))
-            
-#start the game
-gameInProgress = True
-print(
-    "welcome to spaceslag"
-)
+            gameBoard = GameBoard(int(difficulty))         
 
 #run the game
 while(gameInProgress):
@@ -27,17 +26,22 @@ while(gameInProgress):
     moveTo = input("where do you want to move to? (? for help, Q for quit): ")
     if(moveTo == "Q"):
         gameInProgress = False
-        print("U lost!")
-        continue
+        print("You pressed a big red and shiny button.")
+        time.sleep(1.5)
+        print("Surely this has no negative concequenses?")
+        time.sleep(2.25)
+        print("right???")
+        time.sleep(2.5)
+        #boom
+        winsound.Beep(1000,2000)
+        time.sleep(1.25)
+        print("You lost!")
     elif(moveTo == "?"):
         input("good luck >:)")
-        continue
     elif(gameBoard.isValidInput(moveTo)):
-        pass
+        gameInProgress = gameBoard.movePlayer(moveTo)
     else:
-        print(F"{moveTo} is not a valid input")
-        time.sleep(2)
-        continue
+        input(F"{moveTo} is not a valid input")
 
 # valid_input = False
 

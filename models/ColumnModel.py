@@ -5,23 +5,30 @@
 
 
 class ColumnModel:
-    def __init__(self, name):
-        self.name = name
-        self.IsHit = False
-        self.IsShip = False
+    def __init__(self, Id, isSol = False):
+        self.Id = Id
+        if isSol:
+            self.name = "Sol"
+            self.shortName = "SOL"
+        else:
+            self.name = "unknown"
+            self.shortName = "IDK"
+        self.isPlayerposition = isSol
+        self.isVisited = isSol
 
     def __str__(self):
-        if self.IsHit and self.IsShip:
-            return "X"
-        elif self.IsHit:
-            return "*"
+        if self.isPlayerposition:
+            return "YOU"
+        elif self.isVisited:
+            return self.shortName
         else:
-            return self.name
+            return self.Id + " "
 
     def __repr__(self) -> str:
-        if self.IsHit and self.IsShip:
-            return "X"
-        elif self.IsHit:
-            return "*"
+        if self.isPlayerposition:
+            return "YOU"
+        elif self.isVisited:
+            return self.shortName
         else:
-            return self.name
+            return self.Id + " "
+    

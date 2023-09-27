@@ -11,12 +11,22 @@ class RowModel:
     self.Name = name
     createColumns = []
     for x in range(0, columns):
-      createColumn = ColumnModel(F"{self.Name}{x}")
+      if(x == 0 and name == "A"):
+        createColumn = ColumnModel(F"{self.Name}{x}",True)
+      else:
+        createColumn = ColumnModel(F"{self.Name}{x}")
       createColumns.append(createColumn)
     self.columns = createColumns
 
   def __str__(self):
-    return F"{self.columns}"
+    return str(self.columns)
   
   def __repr__(self) -> str:
-    return F"{self.columns}"
+    return str(self.columns)
+  
+  def removePlayer(self,width):
+    self.columns[width].isPlayerposition = False
+
+  def addPlayer(self,width):
+    self.columns[width].isPlayerposition = True
+    self.columns[width].isVisited = True

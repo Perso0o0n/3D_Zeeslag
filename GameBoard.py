@@ -7,32 +7,43 @@ class GameBoard:
         #create board with a length scaled by the difficulty. 
         self.length = dificulty * 3
         self.width = dificulty * 3
-        self.playerPosition = 'A0'
-        AddMap = []
+        self.playerAtLength = 0
+        self.playerAtWidth = 0
+        self.map = []
         for i in range(0, self.length + 1):
-            AddMap.append(RowModel(f"{chr(65 + i)}", self.width))
-        self.map = AddMap
+            self.map.append(RowModel(f"{chr(65 + i)}", self.width))
 
     def returnMap(self):
-        print(str(self.map).replace("], [", "\n").replace("[[", "").replace("]]", ""))
+        print(str(self.map).replace("], [", "]\n[").replace("[[", "[").replace("]]", "]"))
 
     def isValidInput(self, userInput):
     # check if the input of the user is valid
         userInput = str(userInput)
         if len(userInput) != 2:
-            print("input to long.")
-            time.sleep(3)
+            print("input to long/short.")
             return False
-        if(userInput[0].isalpha() and userInput[1].isdigit()):
-            inputlength = ord(userInput[0])
+        elif(userInput[0].isalpha() and userInput[1].isdigit()):
+            inputlength = ord(userInput[0]) - 65
             inputwidth = int(userInput[1])
-            if(inputlength < 0 or inputlength > self.length or inputlength < 0 or inputwidth > self.width):
-                print("length or width to long/short")
-                time.sleep(3)
+            if(inputlength < 0 or inputlength > self.length or inputwidth < 0 or inputwidth > self.width):
+                print("out of range")
                 return False
-            if(userInput == self.playerPosition):
+            if(inputwidth == self.playerAtWidth and inputlength == self.playerAtLength):
                 print("you are already there.")
-                time.sleep(3)
                 return False
-            #while()
+            if((inputlength < self.playerAtLength -1 or inputlength > self.playerAtLength +1)
+               or (inputwidth < self.playerAtWidth -1 or inputwidth > self.playerAtWidth +1)):
+                print("you can only fly to adjacent stars")
+                return False
+        return True
+    
+    def movePlayer(self,userInput):
+        inputlength = ord(userInput[0]) - 65
+        inputwidth = int(userInput[1])
+        self.map[self.playerAtLength].removePlayer(self.playerAtWidth)
+        self.map[inputlength].addPlayer(inputwidth)
+        self.playerAtLength = inputlength
+        self.playerAtWidth = inputwidth
+        return True
+
             
