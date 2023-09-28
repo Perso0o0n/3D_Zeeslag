@@ -9,10 +9,15 @@ class RowModel:
 
   def __init__(self, name, columns):
     self.Name = name
+    #create collumns
     createColumns = []
     for x in range(0, columns):
       if(x == 0 and name == "A"):
-        createColumn = ColumnModel(F"{self.Name}{x}",True)
+        # first star is Sol (sun)
+        createColumn = ColumnModel(F"{self.Name}{x}",isSol = True)
+      elif(x == columns -1 and name == chr(65+x)):
+        # last star is a black hole (maw)
+        createColumn = ColumnModel(F"{self.Name}{x}",isMaw = True)
       else:
         createColumn = ColumnModel(F"{self.Name}{x}")
       createColumns.append(createColumn)

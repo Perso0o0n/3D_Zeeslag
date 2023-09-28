@@ -35,8 +35,9 @@ class GameBoard:
                or (inputwidth < self.playerAtWidth -1 or inputwidth > self.playerAtWidth +1)):
                 print("you can only fly to adjacent stars")
                 return False
-        return True
-    
+            return True
+        return False
+
     def movePlayer(self,userInput):
         inputlength = ord(userInput[0]) - 65
         inputwidth = int(userInput[1])
