@@ -1,6 +1,8 @@
 from models.ColumnModel import ColumnModel
 from models.RowModel import RowModel
 import time
+import os
+from colorama import Fore
 
 class GameBoard:
     def __init__(self,dificulty):
@@ -38,13 +40,31 @@ class GameBoard:
             return True
         return False
 
-    def movePlayer(self,userInput):
+    def Travel(self,userInput):
         inputlength = ord(userInput[0]) - 65
         inputwidth = int(userInput[1])
+        isVisited = self.map[inputlength].GetVisited(inputwidth)
+        name = self.map[inputlength].GetStarName(inputwidth)
+        self.movePlayer(inputlength,inputwidth)
+        os.system('cls')
+        self.returnMap()
+        if(isVisited):
+            print(F"welcome back to {name}")
+            #shop???
+        else:
+            print(F"welcome to {name}")
+            #minigame
+        input("press enter to move.")
+        return True
+
+        
+
+    def movePlayer(self,inputlength,inputwidth):
+        
         self.map[self.playerAtLength].removePlayer(self.playerAtWidth)
         self.map[inputlength].addPlayer(inputwidth)
         self.playerAtLength = inputlength
         self.playerAtWidth = inputwidth
-        return True
+        return
 
             

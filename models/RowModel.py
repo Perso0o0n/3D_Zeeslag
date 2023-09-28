@@ -5,6 +5,8 @@
 from models.ColumnModel import ColumnModel
 
 
+from colorama import Fore
+
 class RowModel:
 
   def __init__(self, name, columns):
@@ -15,7 +17,7 @@ class RowModel:
       if(x == 0 and name == "A"):
         # first star is Sol (sun)
         createColumn = ColumnModel(F"{self.Name}{x}",isSol = True)
-      elif(x == columns -1 and name == chr(65+x)):
+      elif(x == columns -1 and name == chr(66+x)):
         # last star is a black hole (maw)
         createColumn = ColumnModel(F"{self.Name}{x}",isMaw = True)
       else:
@@ -35,3 +37,9 @@ class RowModel:
   def addPlayer(self,width):
     self.columns[width].isPlayerposition = True
     self.columns[width].isVisited = True
+  
+  def GetVisited(self,width):
+    return self.columns[width].isVisited
+  
+  def GetStarName(self,width):
+    return self.columns[width].name

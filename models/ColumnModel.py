@@ -4,6 +4,7 @@
 # bool is op geschoten
 import json
 import random
+from colorama import Fore
 
 class ColumnModel:
     def __init__(self, Id, isSol = False, isMaw = False):
@@ -33,17 +34,17 @@ class ColumnModel:
 
     def __str__(self):
         if self.isPlayerposition:
-            return "YOU"
+            return Fore.LIGHTGREEN_EX + "YOU" + Fore.RESET
         elif self.isVisited:
-            return self.shortName
+            return Fore.LIGHTBLACK_EX + self.shortName  +  Fore.RESET
         else:
-            return self.Id + " "
+            return Fore.LIGHTBLACK_EX + self.Id + " " + Fore.RESET
 
     def __repr__(self) -> str:
         if self.isPlayerposition:
-            return "YOU"
+            return Fore.LIGHTGREEN_EX + "YOU" + Fore.RESET
         elif self.isVisited:
-            return self.shortName
+            return Fore.LIGHTBLACK_EX + self.shortName + Fore.RESET
         else:
-            return self.Id + " "
+            return  self.Id + " "
     

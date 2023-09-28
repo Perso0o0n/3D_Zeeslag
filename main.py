@@ -2,7 +2,7 @@ from GameBoard import GameBoard
 import os
 import time
 import winsound
-
+from colorama import Fore
 
 #start the game
 gameInProgress = True
@@ -33,13 +33,14 @@ while(gameInProgress):
         print("right???")
         time.sleep(2.5)
         #boom
-        winsound.Beep(1000,2000)
+        winsound.Beep(1000,2000) # piep
+        #winsound.MessageBeep(-1)# bleeb
         time.sleep(1.25)
         print("You lost!")
     elif(moveTo == "?"):
         input("good luck >:)")
     elif(gameBoard.isValidInput(moveTo)):
-        gameInProgress = gameBoard.movePlayer(moveTo)
+        gameInProgress = gameBoard.Travel(moveTo)
     else:
         input(F"{moveTo} is not a valid input")
 
