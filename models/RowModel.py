@@ -43,3 +43,9 @@ class RowModel:
   
   def GetStarName(self,width):
     return self.columns[width].name
+  
+  def HasShop(self,width):
+    return self.columns[width].HasShop
+  
+  def BuyShop(self,width):
+    self.columns[width].HasShop = True

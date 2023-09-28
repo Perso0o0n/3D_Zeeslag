@@ -9,6 +9,7 @@ from colorama import Fore
 class ColumnModel:
     def __init__(self, Id, isSol = False, isMaw = False):
         self.Id = Id
+        self.HasShop = isSol
         if isSol:
             self.name = "Sol"
             self.shortName = "SOL"
