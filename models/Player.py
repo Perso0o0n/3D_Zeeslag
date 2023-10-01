@@ -6,6 +6,7 @@ class Player:
         self.playerAtLength = 0
         self.playerAtWidth = 0
         self.fuel = 35 + 15*dificulty
+        self.hasAAPP = False
     
     def RemoveShips(self, amount):
         self.ships -= amount
@@ -18,7 +19,7 @@ class Player:
         if self.ships > 15:
             while self.ships > 15:
                 self.ships -= 1
-                self.money += 15
+                self.money += 10
         return
     
     def BuyItem(self, price):

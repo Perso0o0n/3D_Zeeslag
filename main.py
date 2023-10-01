@@ -23,8 +23,9 @@ while not(valid_input):
 while(gameInProgress):
     os.system('cls')
     gameBoard.returnMap()
+    gameBoard.printStats()
     moveTo = input("where do you want to move to? (? for help, Q for quit): ")
-    if(moveTo == "Q"):
+    if(moveTo.upper() == "Q"):
         gameInProgress = False
         print("You pressed a big red and shiny button.")
         time.sleep(1.5)
@@ -38,7 +39,18 @@ while(gameInProgress):
         time.sleep(1.25)
         print("You lost!")
     elif(moveTo == "?"):
-        input("good luck >:)")
+        print("your goal is to reach the 'devils maw', a black hole that needs to be discovered.")
+        time.sleep(0.5)
+        print("this maw is in the oposite side of 'sol', the system the earth resides in.")
+        time.sleep(0,5)
+        print("(in 'sol' there will always be a shop!)")
+        time.sleep(0,5)
+        print("you can move by typing the coördinates of the star you want to visit, but you can only move to adjacent stars. (sol is A0)")
+        time.sleep(0,5)
+        print("moving uses fuel equal to your ships/lives. on the way you can lose or gain ships and fuel.")
+        time.sleep(0,5)
+        print("good luck!")
+        input("(press enter to continue)")
     elif(gameBoard.isValidInput(moveTo)):
         gameInProgress = gameBoard.Travel(moveTo)
     else:

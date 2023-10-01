@@ -8,15 +8,23 @@ from colorama import Fore
 class GameBoard:
     def __init__(self,dificulty):
         #create board with a length scaled by the difficulty. 
+        self.dificulty = dificulty
         self.length = dificulty * 3
         self.width = dificulty * 3
-        self.player = Player(5)
+        self.player = Player(5,dificulty)
         self.map = []
         for i in range(0, self.length + 1):
             self.map.append(RowModel(f"{chr(65 + i)}", self.width))
 
     def returnMap(self):
         print(str(self.map).replace("], [", "]\n[").replace("[[", "[").replace("]]", "]"))
+
+    def printStats(self):
+        print(
+            F" {self.player.fuel} units of fuel. \n",
+            F"{self.player.ships} ships in your armada. \n",
+            F"your bank account contains ${self.player.money} milion ISC"
+        )
 
     def isValidInput(self, userInput):
     # check if the input of the user is valid
@@ -62,11 +70,11 @@ class GameBoard:
             #shop???
             print(F"welcome back to {name}")
             if(self.map[inputlength].HasShop):
-                pass
+                self.shop(name)
         else:
             #minigame
             print(F"welcome to {name}")
-        input("press enter to move.")
+        input("(press enter to move.)")
         return True
 
         
@@ -79,4 +87,71 @@ class GameBoard:
         self.player.playerAtWidth = inputwidth
         return
 
-            
+    def shop(self,name):
+        incorrectInput = True
+        while(incorrectInput):
+            userInput = input(F"{name} has a shop. enter? (Y/N)")
+            match userInput.upper():
+                case "Y":
+                    hasBoughtSomething = False
+                    os.system("cls")
+                    print("you enter the shop: ")
+                    time.sleep(0.5)
+                    while(incorrectInput):
+                        print("wanna buy something?")
+                        print(F"prices: \n\n1 unit of fuel: ${5*self.dificulty} milion ISC. (A)")
+                        print(F"Fine spaceships: {11*self.dificulty} milion ISC per vessel. (B)")
+                        print(F"All Access Platinum Pass AAPP: {20*self.dificulty} milion ISC. for your shopping convenience. (C)")
+                        print(F"leave the shop. (D)")
+                        print(F"your ISC: ${self.player.money} milion")
+                        userInput = input("what will it be: ")
+                        match userInput.upper():
+                            case "A":
+                                if self.player.BuyItem(5*self.dificulty):
+                                    print("+1 unit of fuel")
+                                    hasBoughtSomething = True
+                                    self.player.fuel += 1
+                                else:
+                                    print("you are to poor")
+
+                            case "B":
+                                if self.player.BuyItem(11*self.dificulty):
+                                    print("+1 ship")
+                                    hasBoughtSomething = True
+                                    self.player.AddShips(1)
+                                else:
+                                    print("you are to poor")
+
+                            case "C":
+                                if not(self.player.hasAAPP):
+                                    if self.player.BuyItem(20*self.dificulty):
+                                        hasBoughtSomething = True
+                                        print("you got the legendary All Access Platinum Pass (AAPP)!")
+                                        self.player.hasAAPP = True
+                                    else:
+                                        print("only the rich are allowed to carry an object of status so powerfull as the AAPP! (not enough $)")
+                                else: print("you already have the pass, valued customer.")
+
+                            case "D":
+                                #leave message
+                                incorrectInput = False
+                                if(hasBoughtSomething):
+                                    os.system("cls")
+                                    print("Until we meet again valued custumer!")
+                                    if(self.player.hasAAPP):
+                                        print(F"and some extra fuel for the way back for our AAPP customers! (+{self.player.ships} fuel)")
+                                        self.player.fuel += self.player.ships
+                                elif(not(self.player.hasAAPP)):
+                                    print("not buying anything you poor ****? ")
+                                print("have a nice day...")
+
+                            case _:
+                                input("that was not a valid input. (Y/N) (enter to continue)")
+                        input("(enter to continue)")
+                        os.system("cls")
+
+
+                case "N":
+                    return
+                case _:
+                    print("that was not a valid input. (Y/N)")
