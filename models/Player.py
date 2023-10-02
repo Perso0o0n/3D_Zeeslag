@@ -7,7 +7,11 @@ class Player:
         self.playerAtWidth = 0
         self.fuel = 35 + 15*dificulty
         self.hasAAPP = False
-    
+        self.hasTheEgg = False
+        self.hasWordleTrophy = False
+        self.hasMovieTrophy = False
+        self.hasKey = False
+
     def RemoveShips(self, amount):
         self.ships -= amount
         if self.ships < 1:
