@@ -6,6 +6,7 @@ import winsound
 from colorama import Fore
 
 
+
 #start the game
 gameInProgress = True
 input(
@@ -31,7 +32,7 @@ while(gameInProgress):
         gameInProgress = False
         print("You pressed a big red and shiny button.")
         time.sleep(1.5)
-        print("Surely this has no negative concequenses?")
+        print("Surely this has no negative consequences?")
         time.sleep(2.25)
         print("right???")
         time.sleep(2.5)

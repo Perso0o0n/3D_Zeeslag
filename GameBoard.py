@@ -16,6 +16,7 @@ class GameBoard:
         self.width = dificulty * 3
         self.player = Player(5,dificulty)
         self.map = []
+        self.wordlewins = 0
         for i in range(0, self.length + 1):
             self.map.append(RowModel(f"{chr(65 + i)}", self.width))
 
@@ -78,6 +79,7 @@ class GameBoard:
             #minigame
             print(F"welcome to {name}")
             haswon = self.random_minigame(name)
+        
         input("(press enter to move.)")
         return True
 
@@ -116,7 +118,7 @@ class GameBoard:
                                     hasBoughtSomething = True
                                     self.player.fuel += 1
                                 else:
-                                    print("you are to poor")
+                                    print("you are too poor")
 
                             case "B":
                                 if self.player.BuyItem(11*self.dificulty):
@@ -124,7 +126,7 @@ class GameBoard:
                                     hasBoughtSomething = True
                                     self.player.AddShips(1)
                                 else:
-                                    print("you are to poor")
+                                    print("you are too poor")
 
                             case "C":
                                 if not(self.player.hasAAPP):
@@ -133,7 +135,7 @@ class GameBoard:
                                         print("you got the legendary All Access Platinum Pass (AAPP)!")
                                         self.player.hasAAPP = True
                                     else:
-                                        print("only the rich are allowed to carry an object of status so powerfull as the AAPP! (not enough $)")
+                                        print("only the rich are allowed to carry an object of status so powerful as the AAPP! (not enough $)")
                                 else: print("you already have the pass, valued customer.")
 
                             case "D":
@@ -164,24 +166,34 @@ class GameBoard:
     def random_minigame(self, name):
         random_number = random.randint(0, 11 - self.dificulty)
         
-        if random_number <= 3:
+        if random_number <= 11:
             time.sleep(0.5)
             
             
             if not (wordle.play_wordle()):
+                self.wordlewins = 0
                 if not (self.player.RemoveShips(1)):
                     print("You are dead! ")
                     return False
+                
+            else:
+                self.wordlewins += 1
+                if self.wordlewins == 3 and not (self.player.hasWordleTrophy):
+                    print("You found the" + Fore.CYAN + " Wordle Master Trophy! " + Fore.RESET)
+                    self.player.hasWordleTrophy = True
 
 
                 
         
-        elif random_number <= 6:
+        elif random_number <= 15:
             time.sleep(0.5)
-            if not (movie_guesser.play_movie_guesser()):
+            haswon, all_correct = movie_guesser.play_movie_guesser()
+            if not (haswon):
                 if not (self.player.RemoveShips(1)):
                     print("You are dead! ")
                     return False
+            elif all_correct:
+                self.player.hasMovieTrophy = True
         else:
             pass
         #good event

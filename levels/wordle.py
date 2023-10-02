@@ -6,7 +6,8 @@ import json
 
 class wordle:
     def play_wordle():
-        print("Welcome to wordle!")
+        
+        print("Aliens have kidnapped you and the only way they will let you go is by playing their game! ")
         time.sleep(0.7)
         print("Type " + "\033[1m" + "info " + "\033[0m" + "for info about the game or " + "\033[1m" + "start " + "\033[0m" + "to start the game.")
         user_input = input("")
@@ -22,6 +23,7 @@ class wordle:
             time.sleep(2)
             print("You start with 5 lives. Each time you give an incorrect answer you will lose 1 life. Each correct answer gives you an extra life. ")
             time.sleep(2.5)
+            print("If you run out of lives, you will lose a " +  "\033[1m" + Fore.YELLOW + "ship" + Fore.RESET + "\033[0m" + ".")
             user_input = "start"
             
         if user_input == "start":
@@ -55,9 +57,9 @@ class wordle:
                 user_input = input("Enter a word: ")
                 if len(user_input) != len(antwoord):
                     print("Invalid Input, please enter a word with 5 letters. ")
-                    time.sleep(0.5)      
-                    
+                    time.sleep(0.5)                         
                     continue
+                
                 check_letters(user_input, antwoord)
                 if user_input == antwoord:
                     print("You guessed the word! ")

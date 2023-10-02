@@ -7,6 +7,8 @@ class Player:
         self.playerAtWidth = 0
         self.fuel = 35 + 15*dificulty
         self.hasAAPP = False
+        self.hasMovieTrophy = False
+        self.hasWordleTrophy = False
     
     def RemoveShips(self, amount):
         self.ships -= amount
