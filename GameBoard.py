@@ -72,13 +72,22 @@ class GameBoard:
         #game end
         if name == "Devils Maw":
             print("You've reached your destination. ")
+            if(self.player.hasAAPP):
+                print(Fore.YELLOW +"you found the All Acces Platinum Pass!")
+            if(self.player.hasDragonTrophy):
+                print(Fore.YELLOW +"you got the dragonTrophy!")
+            if(self.player.hasMovieTrophy):
+                print(Fore.YELLOW +"you got the movieTrophy!")
+            if(self.player.hasWordleTrophy):
+                print(Fore.YELLOW +"you got the wordleTrophy!")
+
             return False
         
         #dragonquest
-        if "Draconis" in name:
+        if "Draconis" in name and self.player.hasTheEgg:
             print("the egg is hatching! seems like this system is a haching ground for dragons.")
             time.sleep(2)
-            
+            self.player.hasTheEgg = False
             incorectinput = True
             while incorectinput:
                 imp = input("the dragon hatchling wants to folow us. kill it? (Y/N)")

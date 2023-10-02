@@ -1,10 +1,8 @@
 from GameBoard import GameBoard
-from levels.MovieGuesser import movie_guesser
 import os
 import time
 import winsound
 from colorama import Fore
-from levels.OtherActivities import OtherActivities
 
 #start the game
 gameInProgress = True
