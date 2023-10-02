@@ -7,6 +7,7 @@ import time
 import os
 from colorama import Fore
 import random
+from levels.OtherActivities import OtherActivities
 
 class GameBoard:
     def __init__(self,dificulty):
@@ -68,18 +69,34 @@ class GameBoard:
         self.movePlayer(inputlength,inputwidth)
         os.system('cls')
         
+        #game end
         if name == "Devils Maw":
             print("You've reached your destination. ")
-            time.sleep(0.69)
-            if self.player.hasMovieTrophy or self.player.hasWordleTrophy:
-                print("Trophies: ")
-                if self.player.hasMovieTrophy:
-                    print(Fore.CYAN + "Movie Trophy " + Fore.RESET)
-                if self.player.hasWordleTrophy:
-                    print(Fore.CYAN + "Wordle Trophy " + Fore.RESET)
-            else:
-                print("You didn't find any trophies. Try to find them all! ")
             return False
+        
+        #dragonquest
+        if "Draconis" in name:
+            print("the egg is hatching! seems like this system is a haching ground for dragons.")
+            time.sleep(2)
+            
+            incorectinput = True
+            while incorectinput:
+                imp = input("the dragon hatchling wants to folow us. kill it? (Y/N)")
+                match imp.upper():
+                    case "Y":
+                        incorectinput = False
+                        print("you killed the poor thing. you monster.")
+                        print("+100 ISC & +5 fuel")
+                        self.player.fuel += 5
+                        self.player.money += 100
+                    case "N":
+                        print("the dragon hatchlings needs a name...")
+                        print("+1 ship & +3 fuel & dragon trophy")
+                        self.player.fuel += 3
+                        self.player.AddShips(1)
+                        self.player.hasDragonTrophy = True
+                    case _: 
+                        print("Y or N u stupid.")
 
         # activity
         self.returnMap()
@@ -178,37 +195,95 @@ class GameBoard:
                     
     def random_minigame(self, name):
         random_number = random.randint(0, 11 - self.dificulty)
-        
-        if random_number <= 5:
-            time.sleep(0.5)
-            
-            
-            if not (wordle.play_wordle()):
-                self.wordlewins = 0
-                if not (self.player.RemoveShips(1)):
-                    print("You are dead! ")
-                    return False
-                
+        activity = OtherActivities()
+        if random_number <= 3:
+            #bad roll
+            if random_number != 3:
+                #random bad activity
+                item, amount = activity.RandomBadActivity(difficulty= self.dificulty)
+                return self.AddItemFromActivity(item, amount)
+
             else:
-                self.wordlewins += 1
-                if self.wordlewins == 3 and not (self.player.hasWordleTrophy):
-                    print("You found the" + Fore.CYAN + " Wordle Master Trophy! " + Fore.RESET)
-                    self.player.hasWordleTrophy = True
+                #play wordle
+                if not (wordle.play_wordle()):
+                    #lost
+                    self.wordlewins = 0
+                    if not (self.player.RemoveShips(1)):
+                        print("You are dead! ")
+                        return False
+                else:
+                    #won
+                    self.wordlewins += 1
+                    if self.wordlewins == 3 and not (self.player.hasWordleTrophy):
+                        print("You found the" + Fore.CYAN + " Wordle Master Trophy! " + Fore.RESET)
+                        self.player.hasWordleTrophy = True
 
-
-                
-        
-        elif random_number <= 10:
-            time.sleep(0.5)
-            haswon, all_correct = movie_guesser.play_movie_guesser()
-            if not (haswon):
-                if not (self.player.RemoveShips(1)):
-                    print("You are dead! ")
-                    return False
-            elif all_correct and not (self.player.hasMovieTrophy):
-                print("You found the " + Fore.CYAN + "Movie Trophy! " + Fore.RESET)
-                self.player.hasMovieTrophy = True
+        elif random_number <= 6:
+            # ok roll
+            if random_number % 2 == 0:
+                #random ok activity
+                item, amount = activity.randomNormalActivity()
+                return self.AddItemFromActivity(item, amount)
+            else:
+                #play wordle
+                if not (wordle.play_wordle()):
+                    #lost
+                    self.wordlewins = 0
+                    if not (self.player.RemoveShips(1)):
+                        print("You are dead! ")
+                        return False
+                else:
+                    #won
+                    self.wordlewins += 1
+                    if self.wordlewins == 3 and not (self.player.hasWordleTrophy):
+                        print("You found the" + Fore.CYAN + " Wordle Master Trophy! " + Fore.RESET)
+                        self.player.hasWordleTrophy = True
         else:
-            pass
-        #good event
-        
+            # good roll
+            if random_number % 2 == 0:
+                # random good activity
+                item, amount = activity.randomGoodActivity(self.player.hasKey)
+                return self.AddItemFromActivity(item, amount)
+            else:
+                # movie guesser
+                time.sleep(0.5)
+                haswon, all_correct = movie_guesser.play_movie_guesser()
+                if not (haswon):
+                    if not (self.player.RemoveShips(1)):
+                        print("You are dead! ")
+                        return False
+                elif all_correct:
+                    self.player.hasMovieTrophy = True
+    
+    def AddItemFromActivity(self,item,amount):
+        match item:
+            case "ISC":
+                self.player.money += amount
+            case "ship":
+                if not(self.player.RemoveShips(amount)):
+                    print("you are dead. ")
+                    return False
+            case "fuel":
+                self.player.fuel += amount
+            case "mistery key":
+                self.player.hasKey = True
+            case "TheEgg":
+                self.player.hasTheEgg
+            case "shop":
+                if amount == 0:
+                    self.player.money -= 30
+                    self.map[self.player.playerAtLength].BuyShop(self.player.playerAtWidth)
+                    self.shop("saved enterprises")
+                elif amount == 1:
+                    
+                    self.shop("new system")
+                elif self.player.hasAAPP:
+                    print("because we have an AAPP, we can enter.")
+                    self.shop("AAPP enjoyers")
+                else:
+                    print("because we do not have a AAPP, the shopkeeper is aggressive and ctrl + alt + F4's a ship.")
+                    if not(self.player.RemoveShips(1)):
+                        print("you are dead. ")
+                        return False
+
+        return True

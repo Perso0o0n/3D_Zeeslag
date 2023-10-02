@@ -3,11 +3,11 @@ import time
 from models.Player import Player
 class OtherActivities:
 
-    def randomGoodActivity(self, difficulty):
+    def randomGoodActivity(self,hasKey):
         randInt = random.randint(1,4)
         match randInt:
             case 1:
-                return self.ALockedBox()
+                return self.ALockedBox(hasKey)
             case 2:
                 return self.FoundCanisterInSpace()
             case 3:
@@ -15,7 +15,7 @@ class OtherActivities:
             case 4:
                 return self.AShop()
 
-    def randomNormalActivity(self, difficulty):
+    def randomNormalActivity(self):
         randInt = random.randint(1,4)
         match randInt:
             case 1:
@@ -40,16 +40,16 @@ class OtherActivities:
                 return self.AngryShop()
 
 
-    def FoundCanisterInSpace(difficulty):
-        item = ""
+    def FoundCanisterInSpace():
+        item = "nothing"
         amount = 0
         match (random.randint(1,3)):
             case 1:
                 item = "fuel"
-                amount = 10 - difficulty
+                amount = 10 
             case 2:
                 item = "ISC"
-                amount = 50 - difficulty*3
+                amount = 50 
             case 3:
                 item = "mistery key"
                 amount += 1
@@ -57,7 +57,7 @@ class OtherActivities:
         if item != "nothing":
             print(F"+{amount} {item}")
         return item, amount
-    
+    @staticmethod
     def FoundTheEgg():
         print(F"one of the moons of this system also has a moon the size of 2 ships. It is always on the dark side of this moon, strange...")
         time.sleep(1)
@@ -73,13 +73,13 @@ class OtherActivities:
                     return "nothing", 0
                 case _:
                     print("invalid input. (Y/N)")
-    
+    @staticmethod
     def BrokenShip():
         print("a ship is sinking into one of the gas giants. it seems to have no crew.")
         time.sleep(1)
         randInt = random.randint(1,3)
         while(True):
-            take = print("rescue the ship, using one fuel? (Y/N)")
+            take = input("rescue the ship, using one fuel? (Y/N)")
             match take.upper():
                 case "Y":
                     print("-1 fuel")
@@ -94,12 +94,12 @@ class OtherActivities:
                     return "nothing", 0
                 case _:
                     print("invalid input. (Y/N)")
-        
+    @staticmethod
     def DebreeField():
         print("this system has a debree field made up of broken spaceships.")
         randInt = random.randint(1,4)
         while(True):
-            take = print("loot, the debree field? (Y/N)")
+            take = input("loot, the debree field? (Y/N)")
             match take.upper():
                 case "Y":
                     if randInt == 1:
@@ -123,7 +123,7 @@ class OtherActivities:
                     return "nothing", 0
                 case _:
                     print("invalid input. (Y/N)")
-
+    @staticmethod
     def ALockedBox(hasKey):
         print("our scanners pick up a small object in this system.")
         time.sleep(2)
@@ -142,15 +142,15 @@ class OtherActivities:
                         print("invalid input. (Y/N)")
         print("but we dont have a key")
         return "nothing", 0
-    
+    @staticmethod
     def AShop():
         print("this system has a shop.")
         return "shop", 1
-    
+    @staticmethod
     def AngryShop():
         print("this system has a shop, it is only accessible to AAPP custumers.")
         return "shop", -1
-    
+    @staticmethod
     def BrokenShop():
         print("this system has a shop, but it seems wrecked")
         while True:
@@ -164,25 +164,25 @@ class OtherActivities:
                         return "nothing", 0
                     case _:
                         print("invalid input. (Y/N)")
-
+    @staticmethod
     def Bomb(difficulty):
         print("this system is full of space mines.")
         randInt = random.randint(0,2+difficulty)
         print(F"we lost {randInt} ships, trying to get out of the minefield.")
         return "ship", randInt*-1
-    
+    @staticmethod
     def leach(difficulty):
         print("this system is full of fuel sucking space leaches.")
         randInt = random.randint(1+difficulty,4+difficulty)
         print(F"we lost {randInt} fuel, trying to exterminate the leaches.")
         return "fuel", randInt*-1
-    
+    @staticmethod
     def Bandits(difficulty):
         print("this system is full of pirates.")
         randInt = random.randint(10*difficulty,10 + 10*difficulty)
         print(F"we lost ${randInt} ISC, for our passage.")
         return "ISC", randInt*-1
-    
+    @staticmethod
     def maintenance():
         print("a ship is in need of some maintenance.")
         print("-$5 ISC")

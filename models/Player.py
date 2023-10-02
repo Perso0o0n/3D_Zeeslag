@@ -11,6 +11,7 @@ class Player:
         self.hasWordleTrophy = False
         self.hasMovieTrophy = False
         self.hasKey = False
+        self.hasDragonTrophy = False
 
     def RemoveShips(self, amount):
         self.ships -= amount
