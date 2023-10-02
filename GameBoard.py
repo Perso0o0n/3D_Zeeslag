@@ -1,9 +1,12 @@
 from models.ColumnModel import ColumnModel
 from models.RowModel import RowModel
 from models.Player import Player
+from levels.wordle import wordle
+from levels.MovieGuesser import movie_guesser
 import time
 import os
 from colorama import Fore
+import random
 
 class GameBoard:
     def __init__(self,dificulty):
@@ -74,6 +77,7 @@ class GameBoard:
         else:
             #minigame
             print(F"welcome to {name}")
+            haswon = self.random_minigame(name)
         input("(press enter to move.)")
         return True
 
@@ -156,4 +160,29 @@ class GameBoard:
                 case _:
                     print("that was not a valid input. (Y/N)")
                     
-                    #hi
+                    
+    def random_minigame(self, name):
+        random_number = random.randint(0, 11 - self.dificulty)
+        
+        if random_number <= 3:
+            time.sleep(0.5)
+            
+            
+            if not (wordle.play_wordle()):
+                if not (self.player.RemoveShips(1)):
+                    print("You are dead! ")
+                    return False
+
+
+                
+        
+        elif random_number <= 6:
+            time.sleep(0.5)
+            if not (movie_guesser.play_movie_guesser()):
+                if not (self.player.RemoveShips(1)):
+                    print("You are dead! ")
+                    return False
+        else:
+            pass
+        #good event
+        
