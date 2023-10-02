@@ -1,9 +1,10 @@
-# 3D_Zeeslag
+
+jelle:
+
 maandag: begonnen met werken aan 1e idee 3D zeeslag.
-    bedenken idee 0.5 uur
+    bedenken idee 1.5 uur
     opzetten github = 1 uur
     maken 2D zeeslag veld = 1 uur 
-    maken code om input te checken = 0,5 uur
 
 dinsdag: start plan 2
     idee aanpassen omdat het niet voldeed aan de eisen = 1,5 uur\
@@ -16,21 +17,20 @@ dinsdag: start plan 2
         speler verliest als de levens op zijn en wint als de speler op bestemming aan komt.
 
     zeeslag veld en input check ombouwen voor nieuw idee = 0,5 uur
-    maken modelletjes = 0,5 uur
-    maken eerste minigame = 2 uur
-    bewegen in de map = 2 uur
+    maken modelletjes = 1 uur
+    bewegen in de map = 3 uur
+    debugging = 1 uur
     
 
-woensdag: 
-    maken 2e minigame 3,5 uur 
-    laten zien map voor spelers = 0,5 uur
-    start spel = 0,5 uur
+woensdag:
+    laten zien map voor spelers = 1,5 uur
+    start spel = 1 uur
 
 donderdag:
-    maken playermodel = 0,5 uur
+    maken playermodel = 1 uur
     maken gameboard = 3 uur
     map kleurtjes geven = 1 uur
-    wordle kleurtjes geven = 0,5 uur
+    wordle kleurtjes geven = 1 uur
     geluid maken = 0,5 uur
 vrijdag:
     niks
@@ -41,3 +41,15 @@ zaterdag:
 zondag:
     uitleg maken = 0,5 uur
     shops implementeren = 2,5 uur
+
+maandag:
+    maken otherActivities 2 uur
+
+    verbeteren randomiser voor kiezen activity 2 uur (otherActivitys toegevoegd aan randomiser)
+    
+    alles debuggen 2 uur
+    maken hidden quests 0,5 uur
+
+totaal: +- 29 uur. 
+
+ben vaak tijd kwijtgeraakt dus tijden kunnen best langer / korter zijn. heb ze daarna ook op het half uur afgerond.

@@ -71,6 +71,7 @@ class GameBoard:
         
         #game end
         if name == "Devils Maw":
+            print(F"welcome to {name}")
             print("You've reached your destination. ")
             if(self.player.hasAAPP):
                 print(Fore.YELLOW +"you found the All Acces Platinum Pass!")
@@ -95,7 +96,7 @@ class GameBoard:
                     case "Y":
                         incorectinput = False
                         print("you killed the poor thing. you monster.")
-                        print("+100 ISC & +5 fuel")
+                        print("+$100 ISC & +5 fuel")
                         self.player.fuel += 5
                         self.player.money += 100
                     case "N":
@@ -106,7 +107,14 @@ class GameBoard:
                         self.player.hasDragonTrophy = True
                     case _: 
                         print("Y or N u stupid.")
-
+        
+        #movieQuest
+        if name == "final space" or name == "a galaxy far far away":
+            print(F"you use the recorder. afer you shot a clip of {name}, the recorder started to shift in mass.")
+            print("you got the movieTrophy! +$100 ISC")
+            self.player.money += 100
+            self.player.hasMovieTrophy = True
+        
         # activity
         self.returnMap()
         if(isVisited):
@@ -249,7 +257,7 @@ class GameBoard:
                         self.player.hasWordleTrophy = True
         else:
             # good roll
-            if random_number % 2 == 0:
+            if random_number % 2 == 0 or self.player.hasRecorder:
                 # random good activity
                 item, amount = activity.randomGoodActivity(self.player.hasKey)
                 return self.AddItemFromActivity(item, amount)
@@ -262,16 +270,26 @@ class GameBoard:
                         print("You are dead! ")
                         return False
                 elif all_correct:
-                    self.player.hasMovieTrophy = True
+                    self.player.hasRecorder = True
+                    print("you have guessed everything correct in one go, you earned a recorder. now make a recording for a trophy!")
     
     def AddItemFromActivity(self,item,amount):
         match item:
             case "ISC":
+                while(self.player.money < amount):
+                    print("sold a ship to pay debt.")
+                    self.player.money += 10
+                    if not(self.player.RemoveShips(1)):
+                        print("you are dead. ")
+                        return False
                 self.player.money += amount
             case "ship":
-                if not(self.player.RemoveShips(amount)):
-                    print("you are dead. ")
-                    return False
+                if amount < 1:
+                    if not(self.player.RemoveShips(amount*-1)):
+                        print("you are dead. ")
+                        return False
+                else:
+                    self.player.AddShips(amount)
             case "fuel":
                 self.player.fuel += amount
             case "mistery key":

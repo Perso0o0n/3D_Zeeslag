@@ -39,7 +39,7 @@ class OtherActivities:
             case 4:
                 return self.AngryShop()
 
-
+    @staticmethod
     def FoundCanisterInSpace():
         item = "nothing"
         amount = 0
@@ -57,6 +57,7 @@ class OtherActivities:
         if item != "nothing":
             print(F"+{amount} {item}")
         return item, amount
+    
     @staticmethod
     def FoundTheEgg():
         print(F"one of the moons of this system also has a moon the size of 2 ships. It is always on the dark side of this moon, strange...")
@@ -73,6 +74,7 @@ class OtherActivities:
                     return "nothing", 0
                 case _:
                     print("invalid input. (Y/N)")
+
     @staticmethod
     def BrokenShip():
         print("a ship is sinking into one of the gas giants. it seems to have no crew.")
@@ -94,6 +96,7 @@ class OtherActivities:
                     return "nothing", 0
                 case _:
                     print("invalid input. (Y/N)")
+    
     @staticmethod
     def DebreeField():
         print("this system has a debree field made up of broken spaceships.")
@@ -123,6 +126,7 @@ class OtherActivities:
                     return "nothing", 0
                 case _:
                     print("invalid input. (Y/N)")
+    
     @staticmethod
     def ALockedBox(hasKey):
         print("our scanners pick up a small object in this system.")
@@ -142,14 +146,17 @@ class OtherActivities:
                         print("invalid input. (Y/N)")
         print("but we dont have a key")
         return "nothing", 0
+    
     @staticmethod
     def AShop():
         print("this system has a shop.")
         return "shop", 1
+    
     @staticmethod
     def AngryShop():
         print("this system has a shop, it is only accessible to AAPP custumers.")
         return "shop", -1
+    
     @staticmethod
     def BrokenShop():
         print("this system has a shop, but it seems wrecked")
@@ -164,24 +171,28 @@ class OtherActivities:
                         return "nothing", 0
                     case _:
                         print("invalid input. (Y/N)")
+    
     @staticmethod
     def Bomb(difficulty):
         print("this system is full of space mines.")
         randInt = random.randint(0,2+difficulty)
         print(F"we lost {randInt} ships, trying to get out of the minefield.")
         return "ship", randInt*-1
+    
     @staticmethod
     def leach(difficulty):
         print("this system is full of fuel sucking space leaches.")
         randInt = random.randint(1+difficulty,4+difficulty)
         print(F"we lost {randInt} fuel, trying to exterminate the leaches.")
         return "fuel", randInt*-1
+    
     @staticmethod
     def Bandits(difficulty):
         print("this system is full of pirates.")
         randInt = random.randint(10*difficulty,10 + 10*difficulty)
         print(F"we lost ${randInt} ISC, for our passage.")
         return "ISC", randInt*-1
+    
     @staticmethod
     def maintenance():
         print("a ship is in need of some maintenance.")

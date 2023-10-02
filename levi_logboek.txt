@@ -1,0 +1,29 @@
+Logboek Levy de Leeuw
+
+-------------------------
+
+maandag: begonnen aan de opdracht
+github opzetten en eerste idee coderen. 5 uur
+
+dinsdag: verder gewerkt aan de challenge. 6 uur
+        eerste minigame gemaakt
+
+woensdag: begonnen aan de 2de minigame (wordle) - 6 uur
+
+donderdag: verder gewerkt aan wordle en wat kleine bugs gefixt en t programma wat duidelijker gemaakt - 6 uur
+
+vrijdag: 0.5 uur
+
+zaterdag: niks 
+
+zondag: niks
+
+maandag: er is nu een kans op een random minigame elke keer dat je een stap zet - wordle en movieguesser in de game gezet,
+het programma in het algemeen wat beter gemaakt, kleine bugfixes. 3 uur
+
+
+extra items toegevoegd - 2 uur
+
+nog wat meer verbeteringen - 1 uur 
+
+in totaal 29.5 uur
