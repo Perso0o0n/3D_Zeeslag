@@ -67,6 +67,10 @@ class GameBoard:
         name = self.map[inputlength].GetStarName(inputwidth)
         self.movePlayer(inputlength,inputwidth)
         os.system('cls')
+        
+        if name == "Devils Maw":
+            print("You've reached your destination. ")
+            return False
 
         # activity
         self.returnMap()
@@ -166,7 +170,7 @@ class GameBoard:
     def random_minigame(self, name):
         random_number = random.randint(0, 11 - self.dificulty)
         
-        if random_number <= 11:
+        if random_number <= 5:
             time.sleep(0.5)
             
             
@@ -185,7 +189,7 @@ class GameBoard:
 
                 
         
-        elif random_number <= 15:
+        elif random_number <= 10:
             time.sleep(0.5)
             haswon, all_correct = movie_guesser.play_movie_guesser()
             if not (haswon):
