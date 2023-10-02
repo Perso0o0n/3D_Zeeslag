@@ -101,8 +101,7 @@ class movie_guesser:
             if hp < 1:
                 return False, False
             
-            if all_correct == True:
-                print("You found a secret trophy! ")
+           
                 
             time.sleep(0.5)    
             print("You guessed all the movies, returning to map. ")

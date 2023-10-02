@@ -70,6 +70,15 @@ class GameBoard:
         
         if name == "Devils Maw":
             print("You've reached your destination. ")
+            time.sleep(0.69)
+            if self.player.hasMovieTrophy or self.player.hasWordleTrophy:
+                print("Trophies: ")
+                if self.player.hasMovieTrophy:
+                    print(Fore.CYAN + "Movie Trophy " + Fore.RESET)
+                if self.player.hasWordleTrophy:
+                    print(Fore.CYAN + "Wordle Trophy " + Fore.RESET)
+            else:
+                print("You didn't find any trophies. Try to find them all! ")
             return False
 
         # activity
@@ -196,7 +205,8 @@ class GameBoard:
                 if not (self.player.RemoveShips(1)):
                     print("You are dead! ")
                     return False
-            elif all_correct:
+            elif all_correct and not (self.player.hasMovieTrophy):
+                print("You found the " + Fore.CYAN + "Movie Trophy! " + Fore.RESET)
                 self.player.hasMovieTrophy = True
         else:
             pass
