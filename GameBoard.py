@@ -90,7 +90,7 @@ class GameBoard:
     def shop(self,name):
         incorrectInput = True
         while(incorrectInput):
-            userInput = input(F"{name} has a shop. enter? (Y/N)")
+            userInput = input(F"{name} has a shop. enter? (Y/N)")           
             match userInput.upper():
                 case "Y":
                     hasBoughtSomething = False
