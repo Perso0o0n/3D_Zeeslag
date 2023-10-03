@@ -85,7 +85,7 @@ class GameBoard:
             return False
         
         #dragonquest
-        if "Draconis" in name and self.player.hasTheEgg:
+        if "DRACONIS" in name.upper() and self.player.hasTheEgg:
             print("the egg is hatching! seems like this system is a haching ground for dragons.")
             time.sleep(2)
             self.player.hasTheEgg = False
@@ -122,13 +122,14 @@ class GameBoard:
             print(F"welcome back to {name}")
             if(self.map[inputlength].HasShop):
                 self.shop(name)
+            toReturn = True
         else:
             #minigame
             print(F"welcome to {name}")
-            haswon = self.random_minigame(name)
+            toReturn = self.random_minigame(name)
         
         input("(press enter to move.)")
-        return True
+        return toReturn
 
         
 
